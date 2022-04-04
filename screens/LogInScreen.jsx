@@ -1,28 +1,29 @@
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
-import { login } from "../store/actions/AuthenticationActions";
+import { login, restoreUser } from "../store/actions/AuthenticationActions";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import * as SecureStore from "expo-secure-store";
+// import * as SecureStore from "expo-secure-store";
 
 const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
-  async function load() {
-    let emailFromSecureStore = await SecureStore.getItemAsync("email");
-    let tokenFromSecureStore = await SecureStore.getItemAsync("token");
+  // async function load() {
+  //   let emailFromSecureStore = await SecureStore.getItemAsync("email");
+  //   let tokenFromSecureStore = await SecureStore.getItemAsync("token");
 
-    if (emailFromSecureStore && tokenFromSecureStore) {
-      console.log("success", emailFromSecureStore);
-    } else {
-      console.log("failue");
-    }
-  }
+  //   if (emailFromSecureStore && tokenFromSecureStore) {
+  //     console.log("success", emailFromSecureStore);
+  //     dispatch(restoreUser(emailFromSecureStore, tokenFromSecureStore));
+  //   } else {
+  //     console.log("failue");
+  //   }
+  // }
 
-  useEffect(() => {
-    load();
-  }, []);
+  // useEffect(() => {
+  //   //load();
+  // }, []);
 
   return (
     <View style={styles.container}>
@@ -35,6 +36,8 @@ const LogInScreen = ({ navigation }) => {
       </View>
 
       <Button title="Log In" onPress={() => dispatch(login(email, password))}></Button>
+      {/* <Text>Don't have an account? </Text> */}
+      {/* <Button title="Sign Up" onPress={() => navigation.navigate("SignupScreen")} /> */}
       {/* <Text> You've logged in with email: {email}</Text> */}
     </View>
   );

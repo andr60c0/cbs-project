@@ -1,6 +1,7 @@
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import authenticationReducer from "./store/reducers/AuthenticationReducer";
+import chatReducer from "./store/reducers/ChatReducer";
 import ReduxThunk from "redux-thunk";
 import NavigationComponent from "./components/Navigation";
 import { NavigationContainer } from "@react-navigation/native";
@@ -9,7 +10,7 @@ import { NavigationContainer } from "@react-navigation/native";
 // const Stack = createNativeStackNavigator();
 
 const rootReducer = combineReducers({
-  // chat: chatReducer,
+  chat: chatReducer,
   authentication: authenticationReducer
   // posts: postReducer,
   // events: eventReducer

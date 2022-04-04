@@ -2,7 +2,7 @@ import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image } fr
 import { restoreUser, signup } from "../store/actions/AuthenticationActions";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as SecureStore from "expo-secure-store";
+// import * as SecureStore from "expo-secure-store";
 
 function SignUpScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -13,21 +13,21 @@ function SignUpScreen({ navigation }) {
   // const emaill = useSelector((state) => state.authentication.email);
   // console.log("Email:", emaill);
   // console.log("Token", token);
-  async function load() {
-    let emailFromSecureStore = await SecureStore.getItemAsync("email");
-    let tokenFromSecureStore = await SecureStore.getItemAsync("token");
+  // async function load() {
+  //   let emailFromSecureStore = await SecureStore.getItemAsync("email");
+  //   let tokenFromSecureStore = await SecureStore.getItemAsync("token");
 
-    if (emailFromSecureStore && tokenFromSecureStore) {
-      console.log("success", emailFromSecureStore);
-      dispatch(restoreUser(emailFromSecureStore, tokenFromSecureStore));
-    } else {
-      console.log("failue");
-    }
-  }
+  //   if (emailFromSecureStore && tokenFromSecureStore) {
+  //     console.log("success", emailFromSecureStore);
+  //     dispatch(restoreUser(emailFromSecureStore, tokenFromSecureStore));
+  //   } else {
+  //     console.log("failue");
+  //   }
+  // }
 
-  useEffect(() => {
-    load();
-  }, []);
+  // useEffect(() => {
+  //   //load();
+  // }, []);
 
   return (
     <View style={styles.container}>

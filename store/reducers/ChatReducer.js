@@ -1,4 +1,3 @@
-import { CHATROOMS } from "../../dummy.data";
 import { SUBTRACT, TOGGLE_HAPPY, ADD, ADD_CHATROOM, DELETE_CHATROOM, SIGNUP, FETCH_CHATROOMS } from "../actions/ChatActions";
 import { Chatroom } from "../../entities/Chatroom";
 
