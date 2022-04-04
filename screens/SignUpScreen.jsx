@@ -1,7 +1,8 @@
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { signup } from "../store/actions/AuthenticationActions";
-import { useState } from "react";
+import { restoreUser, signup } from "../store/actions/AuthenticationActions";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import * as SecureStore from "expo-secure-store";
 
 function SignUpScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -12,6 +13,21 @@ function SignUpScreen({ navigation }) {
   // const emaill = useSelector((state) => state.authentication.email);
   // console.log("Email:", emaill);
   // console.log("Token", token);
+  async function load() {
+    let emailFromSecureStore = await SecureStore.getItemAsync("email");
+    let tokenFromSecureStore = await SecureStore.getItemAsync("token");
+
+    if (emailFromSecureStore && tokenFromSecureStore) {
+      console.log("success", emailFromSecureStore);
+      dispatch(restoreUser(emailFromSecureStore, tokenFromSecureStore));
+    } else {
+      console.log("failue");
+    }
+  }
+
+  useEffect(() => {
+    load();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -19,11 +35,11 @@ function SignUpScreen({ navigation }) {
       <Text>Sign up to get access</Text>
 
       <View style={styles.formContainer}>
-        <View style={styles.inputView}>
+        <View>
           <Text style={styles.loginInfoText}>E-MAIL</Text>
           <TextInput placeholder="Email" onChangeText={setEmail} value={email} />
         </View>
-        <View style={styles.inputView}>
+        <View>
           <Text style={styles.loginInfoText}>PASSWORD</Text>
           <TextInput placeholder="Password" onChangeText={setPassword} value={password} />
         </View>
@@ -56,7 +72,7 @@ const styles = StyleSheet.create({
   },
 
   formContainer: {
-    borderWidth: ".5px",
+    borderWidth: 0.5,
     borderColor: "lightgray",
     margin: 15,
     borderRadius: 5,
@@ -64,7 +80,7 @@ const styles = StyleSheet.create({
   },
 
   inputView: {
-    borderBottomWidth: ".5px",
+    borderBottomWidth: 0.5,
     borderBottomColor: "lightgray",
     padding: 10,
     width: eigthy,
@@ -80,8 +96,8 @@ const styles = StyleSheet.create({
 
   loginInfoText: {
     color: "#32305D",
-    fontSize: "10px",
-    fontWeight: 600,
+    fontSize: 10,
+    fontWeight: "600",
     marginBottom: 8
   },
 
@@ -92,7 +108,7 @@ const styles = StyleSheet.create({
   signUpBtn: {
     backgroundColor: "#5050A5",
     color: "#fff",
-    padding: "18px",
+    padding: 18,
     borderRadius: 7,
     margin: 15,
     width: eigthy
