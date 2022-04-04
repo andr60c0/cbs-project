@@ -31,7 +31,7 @@ export const fetchChatrooms = () => {
     });
 
     const data = await response.json(); // json to javascript
-    console.log(" fetch chatrooms (action) data", data);
+    // console.log(" fetch chatrooms (action) data", data);
     if (!response.ok) {
       //There was a problem..
       console.log("There was a problem");
@@ -65,7 +65,7 @@ export const addChatroom = (chatroomName) => {
     });
 
     const data = await response.json(); // json to javascript
-    console.log("data", data);
+    // console.log("data", data);
     if (!response.ok) {
       //There was a problem..
       console.log("There was a problem");
@@ -88,7 +88,7 @@ export const deleteChatroom = (id) => {
     });
 
     const data = await response.json(); // json to javascript
-    console.log("data", data);
+    // console.log("data", data);
     if (!response.ok) {
       //There was a problem..
       console.log("There was a problem");

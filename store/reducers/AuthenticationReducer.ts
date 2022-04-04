@@ -1,13 +1,24 @@
 import { RESTORE_USER, SIGNUP } from "../actions/AuthenticationActions";
 import { LOG_IN } from "../actions/AuthenticationActions";
 
-const initialState = {
+export interface UserState {
+  idToken: string | undefined;
+  email: string | undefined;
+  password: string | undefined;
+}
+
+const initialState: UserState = {
   idToken: undefined,
   email: undefined,
   password: undefined
 };
 
-const authenticationReducer = (state = initialState, action) => {
+export interface Action {
+  type: string;
+  payload: any;
+}
+
+const authenticationReducer = (state: UserState = initialState, action: Action) => {
   switch (action.type) {
     case SIGNUP:
       console.log("Action payload", action.payload);
